@@ -8,8 +8,22 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model TODO {
+model Todo {
   id        String     @default(cuid()) @id
   text     String
   isCompleted   Boolean
+}
+
+model User {
+  id        String     @default(cuid()) @id
+  name     String
+  email    String
+}
+
+model Training {
+  id        String     @default(cuid()) @id
+  work_date     DateTime
+  work_type    String
+  times      Int
+  comment     String
 }

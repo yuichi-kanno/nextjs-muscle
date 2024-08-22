@@ -12,7 +12,9 @@ export const SideNav = () => {
         <li className={styles.item}>
           <Link href="/tasks/list">タスク一覧</Link>
         </li>
-        <li className={styles.item}>リンク</li>
+        <li className={styles.item}>
+          <Link href="/tasks/users">ユーザー一覧</Link>
+        </li>
         <li className={styles.item}>他のページ</li>
         <li className={styles.item}>他のページ</li>
       </ul>

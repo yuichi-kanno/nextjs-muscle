@@ -6,7 +6,7 @@ import { TaskList } from "@/app/components/TaskList";
 export default async function Tasks() {
   // 遅延させている
   await new Promise((resolve) => setTimeout(resolve, 3000));
-  const todos = await prisma.tODO.findMany();
+  const todos = await prisma.todo.findMany();
 
   return (
     <div className={styles.module}>

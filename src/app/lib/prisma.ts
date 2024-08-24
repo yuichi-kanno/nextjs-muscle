@@ -1,9 +1,4 @@
-declare global {
-  var prisma: PrismaClient;
-}
-
 import { PrismaClient } from "@prisma/client";
-let prisma: PrismaClient;
 
 // TODO: productionの場合の対応
 // if (process.env.NODE_ENV === "production") {
@@ -18,6 +13,6 @@ let prisma: PrismaClient;
 //   }
 //   prisma = global.prisma;
 // }
-prisma = new PrismaClient();
+const prisma = new PrismaClient();
 
 export default prisma;

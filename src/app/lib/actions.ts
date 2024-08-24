@@ -70,7 +70,7 @@ export const getTrainingById = async (id: string) => {
         id: id,
       },
     })
-    .then((res) => res)
+    .then((res: any) => res)
     .catch((error) => console.log(error));
 
   return training;

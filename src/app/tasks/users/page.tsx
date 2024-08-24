@@ -5,13 +5,16 @@ import { AddUserForm } from "@/app/components/AddUserForm";
 
 export default async function Users() {
   // 遅延させている
-  await new Promise((resolve) => setTimeout(resolve, 3000));
+  await new Promise((resolve) => setTimeout(resolve, 1000));
   const users = await prisma.user.findMany();
 
   return (
     <div className={styles.module}>
       <UserList users={users} />
+      <div className={styles.formWrapper}>
+
       <AddUserForm />
+      </div>
     </div>
   );
 }

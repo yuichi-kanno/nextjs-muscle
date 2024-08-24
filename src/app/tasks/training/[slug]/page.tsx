@@ -1,4 +1,5 @@
 import styles from "./styles.module.css";
+import prisma from "../../../lib/prisma";
 import { ja } from "date-fns/locale";
 import { format } from "date-fns";
 import { getTrainingById } from "@/app/lib/actions";

@@ -15,7 +15,9 @@ export const SideNav = () => {
         <li className={styles.item}>
           <Link href="/tasks/users">ユーザー一覧</Link>
         </li>
-        <li className={styles.item}>他のページ</li>
+        <li className={styles.item}>
+          <Link href="/tasks/training">筋トレ記録</Link>
+        </li>
         <li className={styles.item}>他のページ</li>
       </ul>
     </div>

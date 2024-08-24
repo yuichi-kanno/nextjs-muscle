@@ -18,7 +18,7 @@ export type Training = {
 };
 
 export default async function Page({ params }: Props) {
-  const training = (await getTrainingById(params.slug)) as Training;
+  const training = await getTrainingById(params.slug) as Training;
 
   return (
     <div className={styles.module}>

@@ -1,31 +1,31 @@
 "use client";
+
 import { useFormState, useFormStatus } from "react-dom";
+import { createTask, FormState } from "@/app/lib/actions";
+// import { addTodo } from "@/app/lib/actions";
 
-
-import styles from "./styles.module.css";
-import { deleteTodo } from "@/app/lib/actions";
-import { addTodo } from "@/app/lib/actions";
-
-function PendingText() {
-  const status = useFormStatus();
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
 
   return (
-    <>
-    {status.pending && <div>送信中だよ。もう少し待ってね。</div>}
-    </>
+    <button type="submit" disabled={pending}>
+      {pending ? "送信中です。今は追加できません" : "タスクを追加する"}
+    </button>
   );
-}
+};
 
 export const AddTodoForm = () => {
+  const initialState: FormState = { error: "" };
+  const [state, formAction] = useFormState(createTask, initialState);
+
   return (
     <>
-    
-    <PendingText />
-    <form action={addTodo}>
-      <label htmlFor="task">タスク</label>
-      <input type="text" name="task" />
-      <button type="submit">Add Todo</button>
-    </form>
+      <form action={formAction}>
+        <label htmlFor="task">タスク</label>
+        <input type="text" name="task" />
+        <SubmitButton />
+        {state?.error && <p>{state.error}</p>}
+      </form>
     </>
   );
 };

@@ -27,15 +27,24 @@ function DeleteButton() {
   );
 }
 
-export const TaskList = ({ todos }: Props) => {
+function PendingText() {
   const status = useFormStatus();
 
+  return (
+    <>
+    {status.pending && <div>送信中だよ。もう少し待ってね。</div>}
+    </>
+  );
+}
+
+export const TaskList = ({ todos }: Props) => {
   return (
     <ul className={styles.list}>
       {todos.map((todo) => {
         return (
           <li className={styles.item} key={todo.id}>
             <span className={styles.text}>{todo.text}</span>
+            <PendingText />
             <form action={deleteTodo}>
               <input type="hidden" name="id" value={todo.id} />
               <DeleteButton />

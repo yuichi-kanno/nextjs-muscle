@@ -14,21 +14,18 @@ export type FormState = {
 //   revalidatePath("/tasks");
 // };
 
-export const createTask = async (
-  state: FormState,
-  formData: FormData
-): Promise<FormState> => {
+export const createTask = async (state: FormState, formData: FormData) => {
   const text = formData.get("task") as string;
 
   try {
     await prisma.todo.create({ data: { text: text, isCompleted: false } });
-    return state;
   } catch (error) {
     state.error = "タスクの作成に失敗したよ";
     return state;
   }
 
   revalidatePath("/");
+  return state;
 };
 
 export const deleteTodo = async (data: FormData) => {

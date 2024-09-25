@@ -8,12 +8,6 @@ export type FormState = {
   error: string;
 };
 
-// export const addTodo = async (data: FormData) => {
-//   const text = data.get("task") as string;
-//   await prisma.todo.create({ data: { text: text, isCompleted: false } });
-//   revalidatePath("/tasks");
-// };
-
 export const createTask = async (state: FormState, formData: FormData) => {
   const text = formData.get("task") as string;
 

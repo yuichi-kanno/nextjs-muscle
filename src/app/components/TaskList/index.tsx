@@ -3,7 +3,7 @@
 import styles from "./styles.module.css";
 import { deleteTodo } from "@/app/lib/actions";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
 
 type Props = {
   todos: {

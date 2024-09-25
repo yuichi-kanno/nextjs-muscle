@@ -1,7 +1,6 @@
 import { AddTrainingForm } from "@/app/components/AddTrainingForm";
 import prisma from "../../lib/prisma";
 import styles from "./page.module.css";
-import { AddUserForm } from "@/app/components/AddUserForm";
 import { TrainingList } from "@/app/components/TrainingList";
 
 export default async function Training() {

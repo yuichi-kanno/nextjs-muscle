@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import { deleteTodo } from "@/app/lib/actions";
 import { addUser } from "@/app/lib/actions";
 
 export const AddUserForm = () => {

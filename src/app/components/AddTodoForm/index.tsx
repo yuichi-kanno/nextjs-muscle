@@ -2,7 +2,6 @@
 
 import { useFormState, useFormStatus } from "react-dom";
 import { createTask, FormState } from "@/app/lib/actions";
-// import { addTodo } from "@/app/lib/actions";
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();

@@ -29,7 +29,8 @@ export default async function Page({ params }: Props) {
       <div className={styles.text}>
         {training.work_type}を{training.times}回やった！
       </div>
-      <div>コメント</div>
+      <br />
+      <div>メモ内容↓↓</div>
       <div>{training.comment}</div>
     </div>
   );

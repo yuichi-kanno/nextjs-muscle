@@ -1,11 +1,9 @@
 "use client";
 
 import styles from "./styles.module.css";
-import { deleteUser } from "@/app/lib/actions";
 import { ja } from "date-fns/locale";
 import { format } from "date-fns";
 
-import { useFormState, useFormStatus } from "react-dom";
 import Link from "next/link";
 
 type Props = {
@@ -25,7 +23,7 @@ export const TrainingList = ({ training }: Props) => {
       {training.map((training) => {
         return (
           <li className={styles.item} key={training.id}>
-            <Link href={`/tasks/training/${training.id}`}>
+            <Link href={`/training/${training.id}`}>
               <span className={styles.text}>
                 {format(training.work_date, "yyyy/MM/dd", { locale: ja })}
               </span>

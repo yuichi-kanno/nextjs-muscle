@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import Tasks from "./list/page";
+import Tasks from "./tasks/page";
 import styles from "./page.module.css";
 import Users from "./users/page";
 import Training from "./training/page";

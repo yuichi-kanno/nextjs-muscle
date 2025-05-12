@@ -1,6 +1,7 @@
 "use client";
 
-import { useFormState, useFormStatus } from "react-dom";
+import { useFormStatus } from "react-dom";
+import { useActionState } from "react";
 import { createTask, FormState } from "@/app/lib/actions";
 
 const SubmitButton = () => {
@@ -15,7 +16,7 @@ const SubmitButton = () => {
 
 export const AddTodoForm = () => {
   const initialState: FormState = { error: "" };
-  const [state, formAction] = useFormState(createTask, initialState);
+  const [state, formAction] = useActionState(createTask, initialState);
 
   return (
     <>

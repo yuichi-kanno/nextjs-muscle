@@ -3,12 +3,6 @@ import { ja } from "date-fns/locale";
 import { format } from "date-fns";
 import { getTrainingById } from "@/app/lib/actions";
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
 export type Training = {
   id: string;
   work_date: Date;
@@ -17,7 +11,7 @@ export type Training = {
   comment: string;
 };
 
-export default async function Page({ params }: Props) {
+export default async function Page({ params, searchParams }: any) {
   const training = await getTrainingById(params.slug) as Training;
 
   return (

@@ -12,6 +12,8 @@ model Todo {
   id        String     @default(cuid()) @id
   text     String
   isCompleted   Boolean
+  priority  String?    // 優先度 (高, 中, 低など)
+  dueDate   DateTime?  // 期限日
 }
 
 model User {
@@ -26,4 +28,6 @@ model Training {
   work_type    String
   times      Int
   comment     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }

@@ -21,8 +21,23 @@ export const AddTodoForm = () => {
   return (
     <>
       <form action={formAction}>
-        <label htmlFor="task">タスク</label>
-        <input type="text" name="task" />
+        <div>
+          <label htmlFor="task">タスク</label>
+          <input type="text" id="task" name="task" required />
+        </div>
+        <div>
+          <label htmlFor="priority">優先度</label>
+          <select id="priority" name="priority">
+            <option value="">指定なし</option>
+            <option value="高">高</option>
+            <option value="中">中</option>
+            <option value="低">低</option>
+          </select>
+        </div>
+        <div>
+          <label htmlFor="dueDate">期限日</label>
+          <input type="date" id="dueDate" name="dueDate" />
+        </div>
         <SubmitButton />
         {state?.error && <p>{state.error}</p>}
       </form>

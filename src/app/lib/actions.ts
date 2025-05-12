@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { parse } from "date-fns";
 import prisma from "./prisma";
+import { Training as PrismaTraining } from "@prisma/client";
 
 export type FormState = {
   error: string;
@@ -68,23 +69,16 @@ export const addTraining = async (data: FormData) => {
   revalidatePath("/");
 };
 
-export type Training = {
-  id: string;
-  work_date: Date;
-  work_type: string;
-  times: number;
-  comment: string;
-};
-
-export const getTrainingById = async (id: string) => {
-  const training = await prisma.training
-    .findUnique({
+export const getTrainingById = async (id: string): Promise<PrismaTraining | null> => {
+  try {
+    const training = await prisma.training.findUnique({
       where: {
         id: id,
       },
-    })
-    .then((res: any) => res)
-    .catch((error: any) => console.log(error));
-
-  return training;
+    });
+    return training;
+  } catch (error) {
+    console.error("Failed to get training by id:", error);
+    return null;
+  }
 };

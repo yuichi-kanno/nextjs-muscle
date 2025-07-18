@@ -1,0 +1,34 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "./generated/client"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL")
+  directUrl = env("POSTGRES_URL_NON_POOLING")
+}
+
+model Todo {
+  id          String    @id
+  text        String
+  isCompleted Boolean
+  dueDate     DateTime?
+  priority    String?
+}
+
+model Training {
+  id        String   @id
+  work_date DateTime
+  work_type String
+  times     Int
+  comment   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime
+}
+
+model User {
+  id    String @id
+  name  String
+  email String
+}

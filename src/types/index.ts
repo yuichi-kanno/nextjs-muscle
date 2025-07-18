@@ -18,6 +18,7 @@ export interface WorkoutSet {
   duration?: number // 秒
   rest?: number // 秒
   notes?: string
+  createdAt: Date
 }
 
 export interface WorkoutExercise {
@@ -27,6 +28,7 @@ export interface WorkoutExercise {
   exercise: Exercise
   sets: WorkoutSet[]
   notes?: string
+  createdAt: Date
 }
 
 export interface Workout {

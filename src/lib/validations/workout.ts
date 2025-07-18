@@ -45,8 +45,7 @@ export const createWorkoutSchema = z.object({
     .date({
       required_error: '日付を選択してください',
       invalid_type_error: '有効な日付を選択してください',
-    })
-    .max(new Date(), '未来の日付は選択できません'),
+    }),
   
   notes: z
     .string()

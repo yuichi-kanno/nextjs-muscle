@@ -9,6 +9,7 @@ export const createExerciseSchema = z.object({
   
   category: z.enum(['strength', 'cardio', 'flexibility', 'balance', 'sports'], {
     required_error: 'カテゴリを選択してください',
+    invalid_type_error: 'カテゴリを選択してください',
   }),
   
   muscleGroups: z

@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "./generated/client"
 }
 
 datasource db {
@@ -8,26 +9,105 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-model Todo {
-  id        String     @default(cuid()) @id
-  text     String
-  isCompleted   Boolean
-  priority  String?    // 優先度 (高, 中, 低など)
-  dueDate   DateTime?  // 期限日
+
+// エクササイズマスタ
+model Exercise {
+  id          String @default(cuid()) @id
+  name        String // "ベンチプレス", "スクワット"
+  category    String // "胸", "脚", "背中"
+  equipment   String? // "バーベル", "ダンベル", "自重"
+  instructions String? // エクササイズの説明
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // リレーション
+  sets        Set[]
+  templates   ExerciseTemplate[]
 }
 
-model User {
-  id        String     @default(cuid()) @id
-  name     String
-  email    String
+// ワークアウトセッション
+model WorkoutSession {
+  id          String @default(cuid()) @id
+  name        String? // "Push Day", "Pull Day"
+  date        DateTime
+  duration    Int? // 分単位
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // リレーション
+  sets        Set[]
 }
 
-model Training {
-  id        String     @default(cuid()) @id
-  work_date     DateTime
-  work_type    String
-  times      Int
-  comment     String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+// セット記録
+model Set {
+  id                String @default(cuid()) @id
+  reps              Int
+  weight            Float?  // kg
+  restTime          Int?    // 秒
+  rpe               Int?    // Rate of Perceived Exertion (1-10)
+  isWarmup          Boolean @default(false)
+  notes             String?
+  createdAt         DateTime @default(now())
+  
+  // リレーション
+  exerciseId        String
+  exercise          Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+  workoutSessionId  String
+  workoutSession    WorkoutSession @relation(fields: [workoutSessionId], references: [id], onDelete: Cascade)
+}
+
+// 体重・体組成記録
+model BodyWeight {
+  id          String @default(cuid()) @id
+  date        DateTime
+  weight      Float   // kg
+  bodyFat     Float?  // %
+  muscle      Float?  // kg
+  notes       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// ワークアウトプログラム
+model WorkoutProgram {
+  id          String @default(cuid()) @id
+  name        String
+  description String?
+  duration    Int?    // 週数
+  level       String  // "初心者", "中級者", "上級者"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  // リレーション
+  templates   WorkoutTemplate[]
+}
+
+// ワークアウトテンプレート
+model WorkoutTemplate {
+  id          String @default(cuid()) @id
+  name        String
+  dayOfWeek   Int?    // 0=日曜日, 1=月曜日...
+  order       Int     // プログラム内での順序
+  
+  // リレーション
+  programId   String
+  program     WorkoutProgram @relation(fields: [programId], references: [id], onDelete: Cascade)
+  exercises   ExerciseTemplate[]
+}
+
+// エクササイズテンプレート
+model ExerciseTemplate {
+  id          String @default(cuid()) @id
+  sets        Int
+  reps        String  // "8-12", "10", "AMRAP"
+  weight      String? // "80%", "RPE8", "bodyweight"
+  restTime    Int?    // 秒
+  order       Int     // テンプレート内での順序
+  
+  // リレーション
+  exerciseId  String
+  exercise    Exercise @relation(fields: [exerciseId], references: [id])
+  templateId  String
+  template    WorkoutTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
 }

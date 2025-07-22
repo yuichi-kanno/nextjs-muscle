@@ -29,9 +29,23 @@ model Training {
 }
 
 model User {
-  id    String @id
-  name  String
-  email String
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  name          String
+  profileImage  String?
+  dateOfBirth   DateTime?
+  height        Float?
+  weight        Float?
+  goalWeight    Float?
+  activityLevel String?   @default("moderate")
+  isPremium     Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  workouts      Workout[]
+  nutritionLogs NutritionLog[]
+  workoutPlans  WorkoutPlan[]
 }
 
 // 新しいテーブル（追加）
@@ -42,14 +56,21 @@ model Exercise {
   muscleGroups String[] 
   description  String?  
   instructions String?  
+  videoUrl     String?
+  imageUrl     String?
+  equipment    String?
+  difficulty   String?  @default("beginner")
+  isPremium    Boolean  @default(false)
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
   
-  workoutExercises WorkoutExercise[]
+  workoutExercises        WorkoutExercise[]
+  workoutPlanExercises    WorkoutPlanSessionExercise[]
 }
 
 model Workout {
   id        String   @default(cuid()) @id
+  userId    String
   name      String   
   date      DateTime
   duration  Int?     
@@ -57,6 +78,7 @@ model Workout {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   
+  user      User             @relation(fields: [userId], references: [id], onDelete: Cascade)
   exercises WorkoutExercise[]
 }
 
@@ -83,4 +105,79 @@ model WorkoutSet {
   createdAt         DateTime @default(now())
   
   workoutExercise WorkoutExercise @relation(fields: [workoutExerciseId], references: [id], onDelete: Cascade)
+}
+
+// 栄養管理用テーブル
+model NutritionLog {
+  id        String   @id @default(cuid())
+  userId    String
+  date      DateTime @default(now())
+  foodName  String
+  calories  Int
+  protein   Float?
+  carbs     Float?
+  fat       Float?
+  fiber     Float?
+  sugar     Float?
+  sodium    Float?
+  mealType  String   // breakfast, lunch, dinner, snack
+  createdAt DateTime @default(now())
+  
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ワークアウトプラン用テーブル
+model WorkoutPlan {
+  id          String   @id @default(cuid())
+  userId      String
+  name        String
+  description String?
+  duration    Int      // 週数
+  difficulty  String   // beginner, intermediate, advanced
+  goal        String   // strength, muscle, endurance, weight_loss
+  isPublic    Boolean  @default(false)
+  isPremium   Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  user     User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  sessions WorkoutPlanSession[]
+}
+
+model WorkoutPlanSession {
+  id           String @id @default(cuid())
+  workoutPlanId String
+  dayOfWeek    Int    // 0-6 (Sunday=0)
+  name         String
+  description  String?
+  
+  workoutPlan WorkoutPlan                 @relation(fields: [workoutPlanId], references: [id], onDelete: Cascade)
+  exercises   WorkoutPlanSessionExercise[]
+}
+
+model WorkoutPlanSessionExercise {
+  id                     String @id @default(cuid())
+  workoutPlanSessionId   String
+  exerciseId             String
+  sets                   Int
+  reps                   String // "8-12" or "10" for flexibility
+  weight                 Float?
+  restTime               Int?
+  notes                  String?
+  order                  Int    @default(0)
+  
+  session  WorkoutPlanSession @relation(fields: [workoutPlanSessionId], references: [id], onDelete: Cascade)
+  exercise Exercise           @relation(fields: [exerciseId], references: [id])
+}
+
+// ユーザーセッション管理（認証用）
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  
+  @@index([token])
+  @@index([userId])
 }

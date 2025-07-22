@@ -185,7 +185,7 @@ export default function WorkoutHistory({ onWorkoutSelect }: WorkoutHistoryProps)
                     </h3>
                     <div className="flex gap-4 text-sm text-gray-600">
                       <span>{formatDate(workout.date)}</span>
-                      <span>{formatDuration(workout.duration)}</span>
+                      <span>{formatDuration(workout.duration || 0)}</span>
                       <span>{workout.exercises.length}種目</span>
                     </div>
                   </div>

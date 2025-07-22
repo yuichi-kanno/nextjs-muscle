@@ -26,12 +26,12 @@ export class WorkoutService {
       },
     })
     
-    return workouts.map(workout => ({
+    return workouts.map((workout: any) => ({
       ...workout,
       date: new Date(workout.date),
       createdAt: new Date(workout.createdAt),
       updatedAt: new Date(workout.updatedAt),
-      exercises: workout.exercises.map(we => ({
+      exercises: workout.exercises.map((we: any) => ({
         ...we,
         createdAt: new Date(we.createdAt),
         exercise: {
@@ -39,7 +39,7 @@ export class WorkoutService {
           createdAt: new Date(we.exercise.createdAt),
           updatedAt: new Date(we.exercise.updatedAt),
         },
-        sets: we.sets.map(set => ({
+        sets: we.sets.map((set: any) => ({
           ...set,
           createdAt: new Date(set.createdAt),
         })),
@@ -75,7 +75,7 @@ export class WorkoutService {
       date: new Date(workout.date),
       createdAt: new Date(workout.createdAt),
       updatedAt: new Date(workout.updatedAt),
-      exercises: workout.exercises.map(we => ({
+      exercises: workout.exercises.map((we: any) => ({
         ...we,
         createdAt: new Date(we.createdAt),
         exercise: {
@@ -83,7 +83,7 @@ export class WorkoutService {
           createdAt: new Date(we.exercise.createdAt),
           updatedAt: new Date(we.exercise.updatedAt),
         },
-        sets: we.sets.map(set => ({
+        sets: we.sets.map((set: any) => ({
           ...set,
           createdAt: new Date(set.createdAt),
         })),
@@ -110,7 +110,7 @@ export class WorkoutService {
       date: new Date(workout.date),
       createdAt: new Date(workout.createdAt),
       updatedAt: new Date(workout.updatedAt),
-      exercises: workout.exercises.map(we => ({
+      exercises: workout.exercises.map((we: any) => ({
         ...we,
         createdAt: new Date(we.createdAt),
         exercise: {
@@ -118,7 +118,7 @@ export class WorkoutService {
           createdAt: new Date(we.exercise.createdAt),
           updatedAt: new Date(we.exercise.updatedAt),
         },
-        sets: we.sets.map(set => ({
+        sets: we.sets.map((set: any) => ({
           ...set,
           createdAt: new Date(set.createdAt),
         })),
@@ -160,7 +160,7 @@ export class WorkoutService {
       date: new Date(workout.date),
       createdAt: new Date(workout.createdAt),
       updatedAt: new Date(workout.updatedAt),
-      exercises: workout.exercises.map(we => ({
+      exercises: workout.exercises.map((we: any) => ({
         ...we,
         createdAt: new Date(we.createdAt),
         exercise: {
@@ -168,7 +168,7 @@ export class WorkoutService {
           createdAt: new Date(we.exercise.createdAt),
           updatedAt: new Date(we.exercise.updatedAt),
         },
-        sets: we.sets.map(set => ({
+        sets: we.sets.map((set: any) => ({
           ...set,
           createdAt: new Date(set.createdAt),
         })),
@@ -205,12 +205,12 @@ export class WorkoutService {
       },
     })
     
-    return workouts.map(workout => ({
+    return workouts.map((workout: any) => ({
       ...workout,
       date: new Date(workout.date),
       createdAt: new Date(workout.createdAt),
       updatedAt: new Date(workout.updatedAt),
-      exercises: workout.exercises.map(we => ({
+      exercises: workout.exercises.map((we: any) => ({
         ...we,
         createdAt: new Date(we.createdAt),
         exercise: {
@@ -218,7 +218,7 @@ export class WorkoutService {
           createdAt: new Date(we.exercise.createdAt),
           updatedAt: new Date(we.exercise.updatedAt),
         },
-        sets: we.sets.map(set => ({
+        sets: we.sets.map((set: any) => ({
           ...set,
           createdAt: new Date(set.createdAt),
         })),

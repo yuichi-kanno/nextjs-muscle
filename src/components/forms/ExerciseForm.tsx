@@ -28,7 +28,7 @@ export default function ExerciseForm({
     resolver: zodResolver(createExerciseSchema),
     defaultValues: initialData || {
       name: '',
-      category: '',
+      category: 'strength' as const,
       muscleGroups: [],
       description: '',
       instructions: '',

@@ -5,7 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { workoutSetSchema, WorkoutSetInput } from '@/lib/validations/workout'
 
 interface WorkoutSetFormProps {
-  onSubmit: (data: WorkoutSetInput, event?: React.FormEvent) => void
+  onSubmit: (data: WorkoutSetInput) => void
   onCancel: () => void
   initialData?: WorkoutSetInput
   isLoading?: boolean
@@ -32,8 +32,8 @@ export default function WorkoutSetForm({
     },
   })
 
-  const handleFormSubmit = (data: WorkoutSetInput, event?: React.FormEvent) => {
-    onSubmit(data, event)
+  const handleFormSubmit = (data: WorkoutSetInput) => {
+    onSubmit(data)
   }
 
   return (

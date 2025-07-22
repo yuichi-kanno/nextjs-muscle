@@ -3,15 +3,13 @@ import { WorkoutService } from '@/lib/api/workouts'
 import { updateWorkoutSchema } from '@/lib/validations/workout'
 import { z } from 'zod'
 
-interface RouteParams {
-  params: {
-    id: string
-  }
-}
-
-export async function GET(request: NextRequest, { params }: RouteParams) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
   try {
-    const workout = await WorkoutService.getById(params.id)
+    const workout = await WorkoutService.getById(id)
 
     if (!workout) {
       return NextResponse.json(
@@ -30,7 +28,11 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function PUT(request: NextRequest, { params }: RouteParams) {
+export async function PUT(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
   try {
     const body = await request.json()
     const validatedData = updateWorkoutSchema.parse({
@@ -38,7 +40,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       date: body.date ? new Date(body.date) : undefined
     })
 
-    const workout = await WorkoutService.update(params.id, validatedData)
+    const workout = await WorkoutService.update(id, validatedData)
 
     return NextResponse.json({ workout }, { status: 200 })
   } catch (error) {
@@ -57,9 +59,13 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
   }
 }
 
-export async function DELETE(request: NextRequest, { params }: RouteParams) {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const { id } = await params
   try {
-    await WorkoutService.delete(params.id)
+    await WorkoutService.delete(id)
 
     return new NextResponse(null, { status: 204 })
   } catch (error) {

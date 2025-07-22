@@ -11,7 +11,7 @@ export class ExerciseService {
       },
     })
     
-    return exercises.map(exercise => ({
+    return exercises.map((exercise: any) => ({
       ...exercise,
       createdAt: new Date(exercise.createdAt),
       updatedAt: new Date(exercise.updatedAt),
@@ -29,7 +29,7 @@ export class ExerciseService {
       },
     })
     
-    return exercises.map(exercise => ({
+    return exercises.map((exercise: any) => ({
       ...exercise,
       createdAt: new Date(exercise.createdAt),
       updatedAt: new Date(exercise.updatedAt),
@@ -49,7 +49,7 @@ export class ExerciseService {
       },
     })
     
-    return exercises.map(exercise => ({
+    return exercises.map((exercise: any) => ({
       ...exercise,
       createdAt: new Date(exercise.createdAt),
       updatedAt: new Date(exercise.updatedAt),
@@ -129,7 +129,7 @@ export class ExerciseService {
       },
     })
     
-    return exercises.map(exercise => ({
+    return exercises.map((exercise: any) => ({
       ...exercise,
       createdAt: new Date(exercise.createdAt),
       updatedAt: new Date(exercise.updatedAt),

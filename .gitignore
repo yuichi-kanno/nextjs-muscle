@@ -36,3 +36,66 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 generated
+
+# Prisma
+/prisma/migrations/
+*.db
+*.db-journal
+*.sqlite
+*.sqlite3
+
+# IDE and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Logs
+logs
+*.log
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Claude Code / Serena
+.serena/
+.claude/
+
+# Backup files
+*.backup
+*.bak
+*-backup.*
+*-old.*
+
+# Temporary files
+*.tmp
+*.temp
+temp/
+
+# MacOS
+.AppleDouble
+.LSOverride
+
+# Windows
+[Dd]esktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
